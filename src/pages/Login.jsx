@@ -1,7 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useContext, useState } from 'react';
-import drivenPlus from '../api/drivenPlus';
-// import logo from '../assets/logo.svg';
+import myWallet from '../api/myWallet';
 import styled from 'styled-components';
 import UserContext from '../contexts/UserContext';
 
@@ -13,19 +12,17 @@ export default function Login() {
 
   function login(event) {
     event.preventDefault();
-    drivenPlus
+    myWallet
       .fazerLogin({ email, password })
       .then((response) => {
         console.log(response.data);
         setUser(response.data);
-        if (response.data.membership !== null) {
+        if (response.data.token !== null) {
           navigate('/home');
-        } else {
-          navigate('/subscriptions');
         }
       })
       .catch((error) => {
-        window.alert(error.response.data.message);
+        window.alert(error.response.data);
       });
   }
 

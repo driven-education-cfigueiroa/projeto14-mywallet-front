@@ -1,41 +1,34 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import drivenPlus from '../api/drivenPlus';
+import myWallet from '../api/myWallet';
 import styled from 'styled-components';
-import masks from '../utils/masks';
 
 export default function Signup() {
   const navigate = useNavigate();
   const [form, setForm] = useState({
     name: '',
-    cpf: '',
     email: '',
     password: '',
+    confirmPassword: '',
   });
 
   function login(event) {
     event.preventDefault();
-    drivenPlus
+    myWallet
       .fazerCadastro(form)
       .then((response) => {
         console.log(response.data);
         navigate('/');
       })
       .catch((error) => {
-        window.alert(error.response.data.message);
+        window.alert(error.response.data);
       });
   }
-
-  const fieldMasks = {
-    cpf: masks.cpf,
-  };
 
   function handleForm(event) {
     setForm({
       ...form,
-      [event.target.name]: fieldMasks[event.target.name]
-        ? fieldMasks[event.target.name](event.target.value)
-        : event.target.value,
+      [event.target.name]: event.target.value,
     });
   }
 
@@ -52,15 +45,6 @@ export default function Signup() {
           required
         />
         <input
-          name="cpf"
-          onChange={handleForm}
-          placeholder="CPF"
-          type="text"
-          value={form.cpf}
-          minLength="14"
-          required
-        />
-        <input
           name="email"
           onChange={handleForm}
           placeholder="E-mail"
@@ -74,6 +58,14 @@ export default function Signup() {
           placeholder="Senha"
           type="password"
           value={form.password}
+          required
+        />
+        <input
+          name="confirmPassword"
+          onChange={handleForm}
+          placeholder="confirmPassword"
+          type="password"
+          value={form.confirmPassword}
           required
         />
         <button type="submit">CADASTRAR</button>
