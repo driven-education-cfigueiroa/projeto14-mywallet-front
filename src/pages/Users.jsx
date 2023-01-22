@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import arrow from '../assets/arrow.svg';
 import { useContext } from 'react';
 import UserContext from '../contexts/UserContext';
 import { useNavigate } from 'react-router-dom';
@@ -14,7 +13,7 @@ export default function Users() {
 
   return (
     <UsersContainer>
-      <img src={arrow} alt="" onClick={() => navigate('/home')} />
+      {/* <img src={arrow} alt="" onClick={() => navigate('/home')} /> */}
       <Form onSubmit={handleSubmit}>
         <input type="text" placeholder="Fulano" value={user.name} disabled />
         <input

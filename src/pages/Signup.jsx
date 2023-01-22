@@ -63,7 +63,7 @@ export default function Signup() {
         <input
           name="confirmPassword"
           onChange={handleForm}
-          placeholder="confirmPassword"
+          placeholder="Confirme a senha"
           type="password"
           value={form.confirmPassword}
           required

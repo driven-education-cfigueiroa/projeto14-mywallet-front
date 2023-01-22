@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import arrow from '../assets/arrow.svg';
 import drivenPlus from '../api/drivenPlus';
 import { useContext, useState } from 'react';
 import UserContext from '../contexts/UserContext';
@@ -39,7 +38,7 @@ export default function Update() {
 
   return (
     <UpdateContainer>
-      <img src={arrow} alt="" onClick={() => navigate(`/users/${user.id}`)} />
+      {/* <img src={arrow} alt="" onClick={() => navigate(`/users/${user.id}`)} /> */}
       <Form onSubmit={handleSubmit}>
         <input
           name="name"

@@ -1,10 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import arrow from '../assets/arrow.svg';
 import drivenPlus from '../api/drivenPlus';
-import list from '../assets/list.svg';
 import Modal from '../components/Modal';
-import money from '../assets/money.svg';
 import styled from 'styled-components';
 import UserContext from '../contexts/UserContext';
 import masks from '../utils/masks';
@@ -14,6 +11,7 @@ export default function Plan() {
   const { id } = useParams();
   const [modal, setModal] = useState(false);
   const [plan, setPlan] = useState(undefined);
+  // eslint-disable-next-line no-unused-vars
   const navigate = useNavigate();
   const [form, setForm] = useState({
     cardName: '',
@@ -53,7 +51,7 @@ export default function Plan() {
   return (
     <>
       <SubscriptionsContainer>
-        <img src={arrow} alt="" onClick={() => navigate(-1)} />
+        {/* <img src={arrow} alt="" onClick={() => navigate(-1)} /> */}
         {plan && (
           <>
             <img src={plan.image} alt="" />

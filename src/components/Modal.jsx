@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import close from '../assets/close.svg';
 import drivenPlus from '../api/drivenPlus';
 import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
