@@ -34,9 +34,10 @@ export default function Home() {
             }
           }, 0);
 
-          setBalance(Math.abs(result).toFixed(2).replace('.', ','));
+          setBalance(result.toFixed(2));
         })
-        .catch((err) => console.log(err));
+        .catch((err) => console.log(err))
+        .finally(() => {});
     }
   }, []);
 
@@ -77,12 +78,8 @@ export default function Home() {
           {data.entries.length > 0 ? (
             <div>
               <SaldaoBolado>SALDO</SaldaoBolado>
-              <span
-                style={{
-                  color: balance >= 0 ? '#03AC00' : '#C70000',
-                }}
-              >
-                {balance}
+              <span style={{color: balance >= 0 ? '#03AC00' : '#C70000'}}>
+                {balance.replace('.', ',').replace('-', '')}
               </span>
             </div>
           ) : null}
@@ -98,16 +95,30 @@ export default function Home() {
         </NoContentDiv>
       )}
       <ButtonsDiv>
-        <div>
-          <img src={plus} alt="plus" onClick={() => {}} />
+        <div
+          onClick={() => {
+            navigate('/nova-entrada');
+          }}
+        >
+          <img
+            src={plus}
+            alt="plus"
+            onClick={() => {
+              navigate('/');
+            }}
+          />
           <p>
             Nova
             <br />
             entrada
           </p>
         </div>
-        <div>
-          <img src={minus} alt="minus" onClick={() => {}} />
+        <div
+          onClick={() => {
+            navigate('/nova-saida');
+          }}
+        >
+          <img src={minus} alt="minus" />
           <p>
             Nova
             <br />
@@ -193,6 +204,7 @@ const ButtonsDiv = styled.div`
     flex-direction: column;
     justify-content: space-between;
     padding: 10px;
+    cursor: pointer;
     img {
       height: 25px;
       width: 25px;

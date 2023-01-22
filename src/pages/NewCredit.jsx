@@ -5,18 +5,18 @@ import styled from 'styled-components';
 import UserContext from '../contexts/UserContext';
 
 export default function Login() {
-  const { setUser } = useContext(UserContext);
+  const { user } = useContext(UserContext);
   const navigate = useNavigate();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [value, setValue] = useState('');
+  const [description, setDescription] = useState('');
 
   function login(event) {
     event.preventDefault();
+    const obj = { value: Number(value), description, operation: 'credit' };
+    console.log(obj);
     myWallet
-      .fazerLogin({ email, password })
+      .inserirEntrada(obj, user.token)
       .then((response) => {
-        console.log(response.data);
-        setUser(response.data);
         if (response.data.token !== null) {
           navigate('/home');
         }
@@ -28,30 +28,35 @@ export default function Login() {
 
   return (
     <LoginContainer>
-      <h1>MyWallet</h1>
+      <TopContainer>
+        <h1>Nova entrada</h1>
+      </TopContainer>
       <form onSubmit={login}>
         <input
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="E-mail"
-          type="email"
-          value={email}
+          onChange={(e) => setValue(e.target.value)}
+          placeholder="Valor"
+          type="text"
+          value={value}
           required
         />
         <input
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder="Senha"
-          type="password"
-          value={password}
+          onChange={(e) => setDescription(e.target.value)}
+          placeholder="Descrição"
+          type="text"
+          value={description}
           required
         />
-        <button type="submit">ENTRAR</button>
+        <button type="submit">Salvar entrada</button>
       </form>
-      <StyledLink to="/cadastro">
-        <p>Primeira vez? Cadastre-se!</p>
-      </StyledLink>
     </LoginContainer>
   );
 }
+
+const TopContainer = styled.div`
+  width: 100%;
+  display: flex;
+  margin-bottom: 40px;
+`;
 
 const LoginContainer = styled.div`
   align-items: center;
@@ -60,14 +65,11 @@ const LoginContainer = styled.div`
   max-width: 500px;
   width: 90%;
   h1 {
-    margin-bottom: 24px;
-    width: 100%;
-    font-family: 'Saira Stencil One', cursive;
-    font-size: 32px;
-    font-weight: 400;
-    line-height: 50px;
-    letter-spacing: 0em;
-    text-align: center;
+    font-family: 'Raleway';
+    font-weight: 700;
+    font-size: 26px;
+    line-height: 31px;
+    color: #fff;
   }
   form {
     width: 100%;
@@ -91,9 +93,10 @@ const LoginContainer = styled.div`
       }
     }
 
-    input[type='email'] {
+    input:nth-child(1) {
       margin-bottom: 16px;
     }
+
     button {
       background-color: #a328d6;
       border-radius: 8px;

@@ -3,12 +3,10 @@ import { useState } from 'react';
 import GlobalStyle from '../styles/GlobalStyle';
 import Home from './Home';
 import Login from './Login';
-import Plan from './Plan';
 import Signup from './Signup';
+import NewCredit from './NewCredit';
+import NewDebit from './NewDebit';
 import styled from 'styled-components';
-import Subscriptions from './Subscriptions';
-import Users from './Users';
-import Update from './Update';
 import UserContext from '../contexts/UserContext';
 
 export default function Index() {
@@ -21,12 +19,11 @@ export default function Index() {
           <BrowserRouter>
             <Routes>
               <Route path="/" element={<Login />} />
-              <Route path="/sign-up" element={<Signup />} />
-              <Route path="/subscriptions" element={<Subscriptions />} />
-              <Route path="/subscriptions/:id" element={<Plan />} />
+              <Route path="/cadastro" element={<Signup />} />
               <Route path="/home" element={<Home />} />
-              <Route path="/users/:id" element={<Users />} />
-              <Route path="/users/:id/update" element={<Update />} />
+              <Route path="/nova-entrada" element={<NewCredit />} />
+              <Route path="/nova-saida" element={<NewDebit />} />
+
             </Routes>
           </BrowserRouter>
         </UserContext.Provider>
