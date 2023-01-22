@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { useState } from 'react';
+import useStickyState from '../hooks/useStickyState';
 import GlobalStyle from '../styles/GlobalStyle';
 import Home from './Home';
 import Login from './Login';
@@ -10,7 +10,8 @@ import styled from 'styled-components';
 import UserContext from '../contexts/UserContext';
 
 export default function Index() {
-  const [user, setUser] = useState(undefined);
+  const [user, setUser] = useStickyState('', 'token');
+
   return (
     <>
       <GlobalStyle />
@@ -23,7 +24,6 @@ export default function Index() {
               <Route path="/home" element={<Home />} />
               <Route path="/nova-entrada" element={<NewCredit />} />
               <Route path="/nova-saida" element={<NewDebit />} />
-
             </Routes>
           </BrowserRouter>
         </UserContext.Provider>

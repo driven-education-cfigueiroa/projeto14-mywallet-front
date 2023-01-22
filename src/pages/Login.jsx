@@ -15,7 +15,6 @@ export default function Login() {
     myWallet
       .fazerLogin({ email, password })
       .then((response) => {
-        console.log(response.data);
         setUser(response.data);
         if (response.data.token !== null) {
           navigate('/home');

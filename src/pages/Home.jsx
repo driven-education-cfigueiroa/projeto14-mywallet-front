@@ -14,14 +14,12 @@ export default function Home() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log(user);
     if (!user?.token) {
       navigate('/');
     } else {
       myWallet
         .listarEntradas(user.token)
         .then((res) => {
-          console.log(res.data);
           setData(res.data);
           const result = res.data.entries.reduce((acc, entry) => {
             switch (entry.operation) {
@@ -53,6 +51,7 @@ export default function Home() {
           src={logout}
           alt="logout"
           onClick={() => {
+            localStorage.removeItem('token');
             navigate('/');
           }}
         />
@@ -62,7 +61,7 @@ export default function Home() {
           <ul>
             {data.entries.map((entry) => (
               <li key={entry._id}>
-                <p>
+                <Divp>
                   <div>
                     <span style={{ color: '#C6C6C6', marginRight: '8px' }}>
                       {entry.date}
@@ -77,7 +76,7 @@ export default function Home() {
                   >
                     {entry.value.toFixed(2).replace('.', ',')}
                   </span>
-                </p>
+                </Divp>
               </li>
             ))}
           </ul>
@@ -145,6 +144,12 @@ const NoContentDiv = styled.div`
   border-radius: 5px;
 `;
 
+const Divp = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+`;
+
 const ContentDiv = styled.div`
   padding: 23px 12px;
   display: flex;
@@ -154,11 +159,6 @@ const ContentDiv = styled.div`
   color: #000;
   background-color: #fff;
   border-radius: 5px;
-  p {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 15px;
-  }
   div {
     display: flex;
     justify-content: space-between;

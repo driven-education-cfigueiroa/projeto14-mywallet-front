@@ -1,5 +1,5 @@
 import { Link, useNavigate } from 'react-router-dom';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import myWallet from '../api/myWallet';
 import styled from 'styled-components';
 import UserContext from '../contexts/UserContext';
@@ -10,10 +10,19 @@ export default function Login() {
   const [value, setValue] = useState('');
   const [description, setDescription] = useState('');
 
+  useEffect(() => {
+    if (!user?.token) {
+      navigate('/');
+    }
+  }, [navigate, user?.token]);
+
   function login(event) {
     event.preventDefault();
-    const obj = { value: Number(value.replace(",", ".")), description, operation: 'debit' };
-    console.log(obj);
+    const obj = {
+      value: Number(value.replace(',', '.')),
+      description,
+      operation: 'debit',
+    };
     myWallet
       .inserirEntrada(obj, user.token)
       .then((response) => {
