@@ -12,7 +12,7 @@ export default function Login() {
 
   function login(event) {
     event.preventDefault();
-    const obj = { value: Number(value), description, operation: 'debit' };
+    const obj = { value: Number(value.replace(",", ".")), description, operation: 'debit' };
     console.log(obj);
     myWallet
       .inserirEntrada(obj, user.token)

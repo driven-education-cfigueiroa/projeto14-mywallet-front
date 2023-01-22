@@ -49,7 +49,13 @@ export default function Home() {
     <HomeContainer>
       <TopContainer>
         <h1>Olá, {data.user.name}</h1>
-        <img src={logout} alt="logout" onClick={() => {}} />
+        <img
+          src={logout}
+          alt="logout"
+          onClick={() => {
+            navigate('/');
+          }}
+        />
       </TopContainer>
       {data.entries.length > 0 && (
         <ContentDiv>
@@ -78,7 +84,7 @@ export default function Home() {
           {data.entries.length > 0 ? (
             <div>
               <SaldaoBolado>SALDO</SaldaoBolado>
-              <span style={{color: balance >= 0 ? '#03AC00' : '#C70000'}}>
+              <span style={{ color: balance >= 0 ? '#03AC00' : '#C70000' }}>
                 {balance.replace('.', ',').replace('-', '')}
               </span>
             </div>
@@ -131,9 +137,12 @@ export default function Home() {
 }
 
 const NoContentDiv = styled.div`
+  background-color: #fff;
+  height: 446px;
   display: flex;
   justify-content: center;
   align-items: center;
+  border-radius: 5px;
 `;
 
 const ContentDiv = styled.div`
@@ -164,6 +173,7 @@ const SaldaoBolado = styled.span`
 `;
 
 const NoContentLi = styled.li`
+  list-style-type: none;
   font-family: 'Raleway';
   font-size: 20px;
   line-height: 23px;
